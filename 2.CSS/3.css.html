@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            background-color: orange;
+            width: 100px;
+            margin:5px;
+            height: 100px;
+            color:white;
+        }
+        .rel{
+            background-color: orangered;
+            position: relative;
+            top: 50px;
+            left: 50px;
+        }
+        .chart{
+            width:300px;
+            height:200px;
+            background-image: url(./chart1.jpeg);
+            background-size: 100% 100%;
+        }
+        span{
+            position:relative;
+            top: 50px;
+            left:50px;
+            color: black;
+        }
+        /* 현재 span이 하나라서 이렇게 썼지만 가급적이면 id를 넣는게 좋다 */
+    </style>
+</head>
+<body>
+    <div>1</div>
+    <div class="rel">2</div>
+    <div>3</div>
+    <div class="chart"> <span>차트 이미지</span></div>
+</body>
+</html>
