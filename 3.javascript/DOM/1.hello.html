@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function sayHello(){
+            console.log('hello');
+            document.write('<H2>hello<H2>');
+            for(let i=0; i<5; i++){
+                document.write("숫자: " + i + "<BR>");
+            }
+            
+            document.write('<button onclick="reset()">RESET</button><H2>');
+        }
+        function reset(){
+            document.write(`<h1>헬로우 월드, JS</h1>
+            <button onclick="sayHello()">Hello</button>`);
+        }
+    </script>
+</head>
+<body>
+    <h1>헬로우 월드, JS</h1>
+    <button onclick="sayHello()">Hello</button>
+    <button onclick="reset()">RESET</button>
+    <script></script>
+</body>
+</html>

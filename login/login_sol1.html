@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            display:flex;
+            justify-content:center;
+            min-height:100vh;
+            align-items:center;
+            font-family: "Jost", "sans-serif";
+            background: linear-gradient(to bottom,#0f0c0f,#302b63,#24243e);
+        }
+        .main{
+            width:350px;
+            height:500px;
+            background:red;
+            border-radius: 10px;
+            box-shadow: 5px 20px 50px #000;
+        }
+        label{
+            color: #fff;
+            font-size: 2.3em;
+            justify-content: center;
+            display: 60px;
+            font-weight: bold;
+            cursor:pointer;
+            transition: .5 ease-in-out;
+
+        }
+        input{            
+            width:60%;
+            height:20px;
+            background: #573b8a;
+            margin: 10px auto;
+        }
+        button{
+            color:#fff;
+            background: #573b8a;
+        }
+        button:hover{
+            background: #6d44b8;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="signup">
+            <label><p id="title">Sign up</p></label><br>
+            <form method="post" id="login-form">
+                <input type="text" placeholder="Username"><br>
+                <input type="email" placeholder="Email"><br>
+                <input type="password" placeholder="Password"><br>
+                <button class="button">Sign up</button><br>
+                <label for="coding"><p id="lg">Login</p></label>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
