@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function number_inc(){
+            // DOM 요소를 가져와서 글자를 숫자로 변환해서 변환함
+            const result=document.getElementById('result');
+            let finalResult = parseInt(result.textContent, 10) + 1;
+            result.textContent=finalResult;
+        }
+        function number_dec(){
+            const result=document.getElementById('result');
+            let finalResult = parseInt(result.textContent) - 1;
+            result.textContent=finalResult;
+
+        }
+    </script>
+</head>
+<body>
+    <H1>버튼 월드</H1>
+    <div>
+        <span id="result">0</span></div>
+    <div>
+    <button onclick="number_inc()">+1</button>
+    <button onclick="number_dec()">-1</button>
+    </div>
+</body>
+</html>

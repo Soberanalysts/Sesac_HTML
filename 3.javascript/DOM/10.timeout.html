@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <H1>화면 리프래쉬(refresh)하기</H1>
+    <p>이 페이지는 3초후에 자동 리프래쉬 됩니다.</p>
+    <script>
+        window.onload = funciton() {
+            setTimeout(function() {
+                console.log("출력");//1.
+                location.reload();  //2. 외부 주소로 부터 다시 로드
+                location.reload(true);//3. 주소창에 있는 주소를 다시 주소창에꺼로 한다 = reload()
+                location=location;  //
+                location.href
+            },3000);
+        }
+    </script>
+</body>
+</html>

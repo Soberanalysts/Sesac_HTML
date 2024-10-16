@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border: 1px solid black;
+            border-collapse:collapse;
+        }
+        /* td{
+            border:1px solid black;
+        } */
+    </style>
+</head>
+<body>
+    <table border ="1" class="table">
+        <tr>
+            <td>셀1</td>
+            <td>셀2</td>
+            <td>셀3</td>
+        </tr>
+        <tr>
+            <td>셀4</td>
+            <td>셀5</td>
+            <td>셀6</td>
+        </tr>
+        <tr>
+            <td>셀7</td>
+            <td>셀8</td>
+            <td>셀9</td>
+        </tr>
+    </table>
+    <button onclick="chageCellColor()">셀 색상 변경</button>
+    <button onclick="chageOddCellColor()">홀수셀 색상 변경</button>
+    <script>
+        function chageCellColor(){
+            // const cellcolor='#' + Math.floor(Math.random()*16777215).toString(16);
+            // table.backgroundColor=cellcolor;
+
+            // var table=document.getElementsByTagName("table");
+            // table[0].style.backgroundColor='lightblue';
+
+            var cells = document.getElementsByTagName("td");
+            // for(var i=0;i<cells.length;i++){
+            //     cells[i].style.backgroundColor="lightblue";
+            // }
+
+            for(var cell of cells){
+                cell.style.backgroundColor='lightblue';
+            }
+
+        }
+        function chageOddCellColor(){
+            // const cellOddcolor='#' + Math.floor(Math.random()*16777215).toString(16);
+            // table.backgroundColor=cellOddcolor;
+            var cells = document.getElementsByTagName("td");
+            // cells[0].style.backgroundColor = 'light';
+            for(var i=0; i<cells.length; i++){
+                if(i%2 !== 1){
+                    cells[i].style.backgroundColor = 'lightgreen';
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>

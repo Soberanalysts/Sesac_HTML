@@ -4,21 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        p{
+            color: red;
+        }
+    </style>
     <script>
         let count=0;
-        function changeColor(){
+        function changeColor(){ 
             count++;
+            const mytext = document.getElementById('mytext');       //HTML DOM 요소만 가져옴.. 
+                //여기에 적용된 CSS는 가져오지 못함.. 
+                //inline 속성만 가져올 수 있다
+                console.log(mytext);
+                const currentColor=mytext.style.color;//현재 색상
+
+                console.log("DOM : " + currentColor);
+
+                //HTML + CSS가 적용된 색상값을 가져오고 싶으면??
+                const currentColor2=window.getComputedStyle(mytext).color;
+                console.log("Computed: "+currentColor2);
+                
             if(count%2==1){
-                const mytext = document.getElementById('mytext');
                 mytext.style.color='red';
-                mytext.style.backgroundColor='yellow';
+                // mytext.style.backgroundColor='yellow';
             }else{
-                const mytext = document.getElementById('mytext');
                 mytext.style.color='blue';
-                mytext.style.backgroundColor='yellow';
+                // mytext.style.backgroundColor='yellow';
             }
-            
-            console.log(mytext);
+ 
         }
         function reset(){
                 const mytext = document.getElementById('mytext');
