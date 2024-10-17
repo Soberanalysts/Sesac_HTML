@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .dragItem{
+                width:100px;
+                height:100px;
+                cursor:pointer;
+                margin:5px;
+        }
+        #dragItem1{
+
+            background-color:#ffcc00;
+
+        }
+        #dragItem2{
+            width:100px;
+            height:100px;
+            background-color:#00ff55;
+            cursor:pointer;
+            margin:5px;
+        }
+        #dragItem3{
+            width:100px;
+            height:100px;
+            background-color:#0800ff;
+            cursor:pointer;
+            margin:5px;
+        }
+        #dropZone{
+            width:400px;
+            height:400px;
+            margin-top:50px;
+            border:2px dashed #ccc;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="dragItem1" draggable="true">Drag Me1</div>
+    <div id="dragItem2" draggable="true">Drag Me2</div>
+    <div id="dragItem3" draggable="true">Drag Me3</div>
+    <div id="dropZone">Drop here</div>
+
+    <script>
+        function App(){
+        return(
+            <div>
+            {
+            [1,2,3].map(function(){
+                return (<div id="dragItem${i}" draggable="true">Drag Me {i}</div>)
+                })
+            }
+            </div>
+            )
+        }
+        const dragItem1 = document.getElementById('dragItem1');
+        const dragItem2 = document.getElementById('dragItem2');
+        const dragItem3 = document.getElementById('dragItem3');
+        const dropZone = document.getElementById('dropZone');
+
+        dragItem1.addEventListener('dragstart', () => {
+            console.log("dragItem1 드래그 시작중...");
+            event.dataTransfer.setData('target', event.target.id);
+            //이벤트 객체(object) 안의 dataTransfer 라는 객체안에 내가 원하는 key, value로 저장 가능.. 
+            //그래서, {"target",id} 이런 형태로 데이터를 저장중...
+        });
+
+        dragItem2.addEventListener('dragstart', () => {
+            console.log("dragItem2 드래그 시작중...");
+            event.dataTransfer.setData('target', event.target.id);
+
+        });
+
+        dragItem3.addEventListener('dragstart', () => {
+            console.log("dragItem3 드래그 시작중...");
+            event.dataTransfer.setData('target', event.target.id);
+
+        });
+
+        dropZone.addEventListener('dragover', (event)=>{
+            event.preventDefault(); //웹 브라우저 본연의 기능 비활성화(주로 파일/URL주소 동작)
+            console.log("이 개체 위에 무언가 올라옴");
+        });
+
+        dropZone.addEventListener('drop', (event) =>{
+            event.preventDefault();
+            const data = event.dataTransfer.getData('target');
+            console.log('드롭 발생', data);
+            //DOM 트리 구조상, 멀티 parent를 가질 수 없음.. 그래서 appendCHild 하면??
+            //이전에서 떨어짐
+            const draggedElement = document.getElementById(data);
+
+            //뭘 잡았는지 기록하고 해당 기록에 따라 appendChild 해야됨
+            dropZone.appendChild(draggedElement);
+            // dropZone.appendChild(dragItem2);
+        });
+    </script>
+    
+</body>
+</html>

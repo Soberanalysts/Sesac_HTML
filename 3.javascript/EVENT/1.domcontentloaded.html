@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //documet.addEventListener("DOMContentLoaded", 함수명);//외부함수 등록
+        // documet.addEventListener("DOMContentLoaded", function () { }); //함수 빌트인 - 익명함수
+        // documet.addEventListener("DOMContentLoaded", () => {}); //함수 빌트인 - 화살표 함수
+        documet.addEventListener("DOMContentLoaded", function (){
+            //DOM이 로딩이 되었을때다..
+            //CSS, Image이런 실제 모든 컨텐츠는 로딩되었다 보장 못함
+            console.log("DOM이 완전히 로딩 되었음 .... ");
+        });
+    </script>
+</body>
+</html>

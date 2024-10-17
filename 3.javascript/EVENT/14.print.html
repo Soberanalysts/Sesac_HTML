@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="print">이 페이지를 출력하기</button>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad aspernatur sapiente quis</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis placeat nemo et expli</p>
+    <script>
+        document.getElementById('print').addEventListener('click',() =>{
+            window.print();
+        })
+        window.onbeforeinput = () => {
+            
+        }
+    </script>
+</body>
+</html>
