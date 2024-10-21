@@ -1,0 +1,47 @@
+const numbers = [1,2,3,4,5];
+// const doubled = numbers.map(콜백함수);   //각각의 개별 멤버에게, 이 함수가 적용된다.
+
+function double(n){
+    return n*2;
+}
+
+const doubled = numbers.map(double);
+console.log(doubled);
+
+// const doubled2 = numbers.map((n)=>(n*2));
+const doubled2 = numbers.map(n=>n*2);
+console.log(doubled2);
+
+const squared = numbers.map(n => n**2);
+console.log(squared);
+
+//객체 ...
+const people = [
+    {name:"Alice", age:25},
+    {name:"Bob", age:30},
+    {name:"Charlie", age:20},
+    {name:"David", age:35},
+]
+
+const names = people.map(p=>p.name);
+console.log(names);
+
+const ages = people.map(p=>p.age);
+console.log(ages);
+
+const fruits = ["apple","banana","grape"];
+const htmlTags = fruits.map(p=> `<li>${p}</li>`);  //좌우를 <li>태그로 감싸기
+console.log(htmlTags);
+// [
+//     <li>apple</li>,
+//     <li>banana</li>,
+//     <li>grape</li>
+// ]
+
+const apiData=[
+    {id:1, firstName: "John", lastName: "Doe"},
+    {id:2, firstName: "Jane", lastName: "Smith"}
+];
+const fullName = apiData.map(n=>n.firstName+" "+n.lastName);
+console.log(fullName);
+//["John Doe", "Jane Smith"]
