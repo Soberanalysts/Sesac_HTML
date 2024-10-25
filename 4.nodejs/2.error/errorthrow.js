@@ -27,11 +27,14 @@ function divide2(a, b) {
     console.log("오류가 나건 안나건 무조건 호출됨.")
   }
 }
+const b = new Number(5);
+const c = new Number(7);
 
 console.log(divide2(5, 0));
 console.log(divide2(7, 2));
 console.log(divide2(5, 7));
 console.log(divide2(5, "7"));
+console.log(divide2(b, c));
 
 
 
