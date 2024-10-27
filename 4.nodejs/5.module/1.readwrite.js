@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 //파일 읽기
-fs.readFile('./example.txt',(err,data)=>{
+fs.readFile('./example.txt', 'utf8',(err,data)=>{
     if(err){
         console.log("뭔가실패?? 파일읽기실패", err);
     }else{
@@ -10,7 +10,7 @@ fs.readFile('./example.txt',(err,data)=>{
 });
 
 
-// fs.readFileSync('./example.txt');
+fs.readFileSync('./example.txt');
 
 
 const content ="이것이 파일에 쓰임";

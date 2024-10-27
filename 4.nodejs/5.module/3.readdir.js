@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const directoryPath = './';
+const directoryPath = '../FolderViewer';
 
 fs.readdir(directoryPath, (err,files) =>{
     if(err){
@@ -26,3 +26,4 @@ fs.readdir(directoryPath, (err,files) =>{
         // });
     }
 });
+
