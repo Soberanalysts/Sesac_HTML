@@ -1,6 +1,6 @@
 const fs = require('fs');
-
-const directoryPath = "./";
+const path = require('path');
+const directoryPath = "../4.class";
 
 fs.readdir(directoryPath, (err, files) =>{
     if(err){
@@ -8,7 +8,8 @@ fs.readdir(directoryPath, (err, files) =>{
         return;
     }
     files.forEach(file => {
-        fs.stat(file, (err,stats) =>{
+        const filePath = path.join(directoryPath, file); // Full path for each file
+        fs.stat(filePath, (err,stats) =>{
             if(err) {
                 console.log("파일 읽기 오류");
                 return;

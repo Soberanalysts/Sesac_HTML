@@ -8,7 +8,7 @@ fs.readdir(directoryPath, (err, files) => {
         return;
     } else {
         console.log("파일 목록:", files);
-        
+
         files.forEach((file) => {
             const filePath = path.join(directoryPath, file); // 파일의 전체 경로 생성
             fs.readFile(filePath, 'utf8', (err, data) => {
