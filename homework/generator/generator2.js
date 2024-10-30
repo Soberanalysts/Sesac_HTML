@@ -70,5 +70,3 @@ function writeDataToCSV(data, filePath){
 }
 
 writeDataToCSV(datas, "store.csv");
-
-module.exports datGenerator;

@@ -37,28 +37,56 @@ class GetCSVData{
     constructor(){
         this.index_user = MyUtility.getRandomInRange(1,1000);
         this.index_store = MyUtility.getRandomInRange(1,100);
-        this.user_id=[];
-        this.store_id=[];
     }
-    getUserId(){
-        this.user_id = readCSV('user.csv', this.index_user, (err, data) => {
+    // getUserId(){
+    //     const userid = readCSV('user.csv', this.index_user, (err, data) => {
+    //         if (err) {
+    //             console.log("파일 읽기 실패", err.message);
+    //         }
+    //         console.log("파일 내의 결과는: ", data[this.index_user][0]);
+    //         return data[this.index_user][0];
+    //     });
+    //     return userid;
+    // }
+    // getStoreId(){
+    //     const storeid = readCSV('store.csv', this.index_store, (err, data) => {
+    //         if (err) {
+    //             console.log("파일 읽기 실패", err.message);
+    //         }
+    //         console.log("파일 내의 결과는: ", data[this.index_store][0]);
+    //         return data[this.index_store][0];
+    //     });
+    //     return storeid;
+    // }
+    // async getUserId() {
+    //     try {
+    //         const data = await readCSV('user.csv', this.index_user); // 비동기 실행 대기
+    //         console.log("파일 내의 결과는: ", data[this.index_user][0]);
+    //         return data[this.index_user][0];
+    //     } catch (err) {
+    //         console.log("파일 읽기 실패", err.message);
+    //     }
+    // }
+
+    // async getStoreId() {
+    //     try {
+    //         const data = await readCSV('store.csv', this.index_store); // 비동기 실행 대기
+    //         console.log("파일 내의 결과는: ", data[this.index_store][0]);
+    //         return data[this.index_store][0];
+    //     } catch (err) {
+    //         console.log("파일 읽기 실패", err.message);
+    //     }
+    // }
+    getStoreId(callback) {
+        readCSV('store.csv', this.index_store, (err, data) => {
             if (err) {
                 console.log("파일 읽기 실패", err.message);
+                return;
             }
-            console.log("파일 내의 결과는: ", data.map(row => row[0]));
-            return data;
+            const storeid = data[this.index_store][0];
+            console.log("파일 내의 결과는: ", storeid);
+            callback(storeid);
         });
-        return userid;
-    }
-    getStoreId(){
-        this.store_id = readCSV('store.csv', this.index_store, (err, data) => {
-            if (err) {
-                console.log("파일 읽기 실패", err.message);
-            }
-            console.log("파일 내의 결과는: ", data.map(row => row[0]));
-            return data;
-        });
-        return storeid;
     }
 }
 
@@ -94,7 +122,7 @@ class OrderDataGenerator{
         for(let i=0; i<count; i++){
             const id = this.idGen.generateId();
             const orderAt = this.ordertimeGen.getOrderTime();
-            const storeid = this.StoreId.getStoreId();
+            const storeid = this.StoreId.getStoreId(storeid => console.log("Store ID:", storeid));
             const userid = null;
             // console.log(storeid);
             data.push([id, orderAt, storeid, userid]);
