@@ -1,18 +1,6 @@
-const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
+const {Idgenerator, MyUtility, writeDataToCSV} = require('./generator1');
 
-class MyUtility{
-    static getRandomInRange(min, max){
-        return Math.floor(Math.random()*(max-min +1)) + min;
-    }
-}
 
-class Idgenerator{
-    generateId(){
-        const id =uuidv4();
-        return id;
-    }
-}
 class StoreGenerator{
     constructor(){
         this.store = ['스타벅스', '투썸','이디야','커피빈','빽다방'];
@@ -44,7 +32,6 @@ class DataGenerator{
         this.storeGen = new StoreGenerator();
         this.addressGen = new AddressGenerator();
     }
-
     generateData(count){
         const data = [];
         for(let i=0; i<count; i++){
@@ -56,17 +43,12 @@ class DataGenerator{
         return data;
     }
 }
+
 const datGenerator = new DataGenerator();
-
 const datas = datGenerator.generateData(100);
-
 console.log(datas);
 
-function writeDataToCSV(data, filePath){
-    const header = ["id", "Name",  "Type", "Address"];
-    const rows = data.map(row => row.join(","));
-    const csvContent = [header, ...rows].join('\n');
-    fs.writeFileSync(filePath, csvContent, 'utf8');
-}
+const header = ["id", "Name",  "Type", "Address"];
 
-writeDataToCSV(datas, "store.csv");
+
+writeDataToCSV(datas, "store.csv",header);

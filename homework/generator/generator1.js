@@ -1,4 +1,3 @@
-const { time } = require('console');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
@@ -85,14 +84,16 @@ class UserGenerator{
 const userGenerator = new UserGenerator();
 const users = userGenerator.generateData(1000);
 
-console.log(users);
+// console.log(users);
 
-function writeDataToCSV(data, filePath){
-    const header = ["id", "Name",  "Gender", "age","Birthdate","Address"];
+const header = ["id", "Name",  "Gender", "age","Birthdate","Address"];
+
+function writeDataToCSV(data, filePath, header){
     const rows = data.map(row => row.join(","));
     const csvContent = [header, ...rows].join('\n');
     fs.writeFileSync(filePath, csvContent, 'utf8');
 }
 
-writeDataToCSV(users, "user.csv");
+writeDataToCSV(users, "user.csv", header);
 
+module.exports = {Idgenerator,MyUtility, writeDataToCSV};

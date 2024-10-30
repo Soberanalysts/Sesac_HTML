@@ -1,26 +1,27 @@
-const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
+const {Idgenerator, MyUtility, writeDataToCSV} = require('./generator1');
 
-class MyUtility{
-    static getRandomInRange(min, max){
-        return Math.floor(Math.random()*(max-min +1)) + min;
+class ItemDataGenerator{
+    constructor(){
+        this.idGen = new Idgenerator();
+        this.item=['Americano Coffee','Strawberry Cake','Watermelon Juice','Orange Juice', 'Espresso Coffee', 'Red Velvet Cake','Vanilla Cake'];
+    }
+    itemGenerator(count){
+        const data = [];
+        for(let i=0; i<count; i++){
+            const id = this.idGen.generateId();
+            const itemName= this.item[Math.floor(Math.random()*this.item.length)];
+            const itemType= itemName.split(' ')[itemName.split(' ').length-1];
+            const unitPrice=500*MyUtility.getRandomInRange(5,14);
+            data.push([id, itemName, itemType, unitPrice]);
+        }
+
+        return data;
     }
 }
-
-class Idgenerator{
-    generateId(){
-        const id =uuidv4();
-        return id;
-    }
-}
+const itemdata = new ItemDataGenerator();
+const datas = itemdata.itemGenerator(20);
+// console.log(datas);
+const header = ["id", "Name",  "Type", "UnitPrice"];
 
 
-
-function writeDataToCSV(data, filePath){
-    const header = ["id", "Name",  "Type", "UnitPrice"];
-    const rows = data.map(row => row.join(","));
-    const csvContent = [header, ...rows].join('\n');
-    fs.writeFileSync(filePath, csvContent, 'utf8');
-}
-
-writeDataToCSV([], "item.csv");
+writeDataToCSV(datas, "item.csv", header);
