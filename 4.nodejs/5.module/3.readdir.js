@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const directoryPath = '../FolderViewer';
+const directoryPath = '../../4.nodejs';
 
 fs.readdir(directoryPath, (err,files) =>{
     if(err){
