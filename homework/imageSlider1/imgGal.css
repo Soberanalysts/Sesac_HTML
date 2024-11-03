@@ -1,0 +1,22 @@
+#container{margin-bottom: 80px;}
+#photo{
+  display: block;
+  width: 200px;
+  height: 200px;
+  border: 10px solid black;
+  margin: 0 auto;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+}
+#gallery{text-align: center;}
+ 
+#gallery > li {
+  display: inline-block;
+  margin: 0 10px;
+}
+ 
+#gallery > li > img{
+  display: block;
+  width: 200px;
+  border: 5px solid black;
+  cursor: pointer;  
+}
