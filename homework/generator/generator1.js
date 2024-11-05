@@ -9,7 +9,7 @@ class MyUtility{
 
 class Idgenerator{
     generateId(){
-        const id =uuidv4();
+        const id = uuidv4();
         return id;
     }
 }
@@ -26,7 +26,7 @@ class NameGenerator{
 
 class GenderGenerator{
     generateGender(){
-        return Math.random() <0.5 ? "Male" : "Female";
+        return Math.random() < 0.5 ? "Male" : "Female";
     }
 }
 class ageGenerator{
@@ -69,7 +69,7 @@ class UserGenerator{
 
     generateData(count){
         const data = [];
-        for(let i=0; i<count; i++){
+        for (let i = 0; i < count; i++) {
             const id = this.idGen.generateId();
             const name = this.nameGen.generateName();
             const gender = this.genderGen.generateGender();
@@ -86,7 +86,7 @@ const users = userGenerator.generateData(1000);
 
 // console.log(users);
 
-const header = ["id", "Name",  "Gender", "age","Birthdate","Address"];
+const header = ["id", "Name", "Gender", "age", "Birthdate", "Address"];
 
 function writeDataToCSV(data, filePath, header){
     const rows = data.map(row => row.join(","));
@@ -96,4 +96,4 @@ function writeDataToCSV(data, filePath, header){
 
 writeDataToCSV(users, "user.csv", header);
 
-module.exports = {Idgenerator,MyUtility, writeDataToCSV};
+module.exports = {Idgenerator, MyUtility, writeDataToCSV};

@@ -78,27 +78,37 @@ console.log(fs);
 //         // });
 //     }
 // });
-class Tree {
-    constructor(file){
-        this.filename = file;
-    }
-    printPath(file){
-        files = fs.readdirSync(__dirname);  // 모든 파일 조회
-        console.log(files);
-        console.log('---------------------')
-        fs.readdir(file, (err, files)=>{
-            if (err) {
-                console.error('Error reading directory:', err);
-                return;
-            }
-            console.log('Files in relative path:', files);
-        });
-    };
+// class Tree {
+//     constructor(file){
+//         this.filename = file;
+//     }
+//     printPath(file){
+//         files = fs.readdirSync(__dirname);  // 모든 파일 조회
+//         console.log(files);
+//         console.log('---------------------')
+//         fs.readdir(file, (err, files)=>{
+//             if (err) {
+//                 console.error('Error reading directory:', err);
+//                 return;
+//             }
+//             console.log('Files in relative path:', files);
+//         });
+//     };
 
-    //파일 경로 출력
+//     //파일 경로 출력
  
+    
+// }
+const items = fs.readdirSync(dir);
 
-}
+items.forEach((item) => {
+    const fullPath = path.join(dir, item);
+    const isDirectory = fs.statSync(fullPath).isDirectory();
 
-const filetree=new Tree();
-filetree.printPath('./');
+    // Indent based on depth to show tree structure
+    console.log(`${' '.repeat(depth * 2)}${isDirectory ? '📂' : '📄'} ${item}`);
+});
+
+    // const filetree=new Tree()
+// filetree.printPath('./');
+// console.log(items);

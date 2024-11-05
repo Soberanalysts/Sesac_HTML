@@ -46,7 +46,7 @@ class DataGenerator{
 
 const datGenerator = new DataGenerator();
 const datas = datGenerator.generateData(100);
-console.log(datas);
+// console.log(datas);
 
 const header = ["id", "Name",  "Type", "Address"];
 

@@ -1,7 +1,6 @@
 const fs = require('fs');
 const {Idgenerator, MyUtility, writeDataToCSV} = require('./generator1');
 
-
 function readCSV(filePath, callback) {
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
