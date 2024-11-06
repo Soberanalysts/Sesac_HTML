@@ -7,16 +7,16 @@ server.on('connection',() =>{
 });
 
 server.on('request', (req, res) => {
-    console.log('요청이 왔습니다.');
-    console.log('req 중에 유용한 정보:');
-    console.log(`req.method = ${req.method}`);
-    console.log(`req.url = ${req.url}`);
-    console.log(req.headers);
-    console.log(`req.headers = ${req.headers}`);
-    console.log(`req.headers = ${JSON.stringify(req.headers)}`);
-    console.log(`req.headers['user-agent'] = ${req.headers['user-agent']}`);
-    console.log(`req.headers['content-type'] = ${req.headers['content-type']}`);
-    console.log(`req.socket.remoteaddress = ${req.socket.remoteAddress}`);
+    // console.log('요청이 왔습니다.');
+    // console.log('req 중에 유용한 정보:');
+    // console.log(`req.method = ${req.method}`);
+    // console.log(`req.url = ${req.url}`);
+    // console.log(req.headers);
+    // console.log(`req.headers = ${req.headers}`);
+    // console.log(`req.headers = ${JSON.stringify(req.headers)}`);
+    // console.log(`req.headers['user-agent'] = ${req.headers['user-agent']}`);
+    // console.log(`req.headers['content-type'] = ${req.headers['content-type']}`);
+    // console.log(`req.socket.remoteaddress = ${req.socket.remoteAddress}`);
     
     //헤더
     res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});

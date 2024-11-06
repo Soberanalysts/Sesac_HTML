@@ -1,11 +1,10 @@
 
-const data = {bbb:'bbb', aaa:'aaa'};
-const deleteData = 'aaa';
+const data = {b:'bbb', a:'aaa'};
+const deleteData = 'b';
 
 let array = ['aaa', 'bbb']
 
-console.log("삭제전", data);
-
+console.log(data.deleteData);
 let result = array.filter((key) => key === deleteData);
 
 // if (deleteData in data) {
@@ -15,7 +14,3 @@ let result = array.filter((key) => key === deleteData);
 //     console.log(`No data found for key: ${deleteData}`);
 // }
 delete data.aaa;
-console.log("삭제후", data);
-// console.log(deleteData);
-console.log(result);
-// console.log(result);

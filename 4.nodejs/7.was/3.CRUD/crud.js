@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs').promises;
 const path = require('path');
+// const parse = require('querystring');
 
 const users = {};
 
@@ -18,22 +19,44 @@ const server = http.createServer((req, res) => {
         res.writeHead(404);
         res.end('Not Found');
     }
-    res.end('처리완료');
+    // res.end('처리완료');
 });
 
 server.listen(3000, () =>{
     console.log('서버가 3000 포트에서 대기 중입니다.');
 });
 
-function handleGetRequest(req, res) {
+async function handleGetRequest(req, res) {
     try {
         if (req.url === '/') {
-            res.end('GET요청 / 응답완료');
+            const data = await fs.readFile('./index.html');
+            res.end(data);
         } else if (req.url === '/about') {
-            res.end('GET요청 /about 응답완료');
+
+            // const filePath = path.join(__dirname, req.url);
+            // const fileExt = path.extname(filePath);
+
+            // let contentType = 'text.plain';
+            // if(fileExt == '.jpeg' || fileExt === '.jpg') {
+            //     contentType = 'image/jpeg';
+            // } else if (fileExt === '.png') {
+            //     contentType = 'image/png';
+            // }
+            const data = await fs.readFile('./about.html');
+            res.writeHead(200, {'Content-Type' : 'text/html; charset=utf-8'});
+            res.write('<H1>안녕</H1>');
+            res.end(`GET요청 /about 응답완료 ${data}`);
         } else if (req.url === '/user') {
-            console.log(users);
-            res.end('잘 출력했다');
+            // console.log(users);
+            res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'})
+            res.end(JSON.stringify(users));
+        } else if (req.url.startsWith('/static')) {
+            const filePath = path.join(__dirname ,req.url);
+            console.log(filePath);
+            const data = await fs.readFile(filePath);
+            res.writeHead(200, {'Content-Type':'application/javascript; charset=utf-8'})
+
+            res.end("파일 곧 전송됨....");
         } else {
             res.writeHead(404);
             res.end('Not Found');
@@ -66,7 +89,10 @@ function handlePostRequest(req, res) {
                 const parsedData = JSON.parse(body);
                 const username = parsedData.name;
                 users[username] = username;
-                return res.end(`application/json 이구나...${parsedData}`);
+                // return res.end(`application/json 이구나...${parsedData}`);
+                return res.end(`application/json 이구나...body: ${body} json: ${parsedData}`);
+                // return res.end(`application/json 이구나...`);
+            } else if (req.headers) {req.headers['content-type'] === 'app'
             } else {
                 res.writeHead(404);
                 return res.end('모르는 타입임')
@@ -89,5 +115,5 @@ function handlePutRequest(req, res) {
 
 
 function handleDeleteRequest(req, res) {
-
+    
 }
