@@ -9,3 +9,9 @@ package-lock.json
 *.txt
 *.csv
 !ascii.txt
+
+
+#DB파일 예외
+*.DB파일
+*.sqlite
+*.sqlite3

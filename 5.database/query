@@ -1,0 +1,207 @@
+1. SELECT CONCAT(FirstName,' ',LastName), CustomerId, Country FROM customers WHERE customers.Country!='USA';
+
+2. SELECT CONCAT(FirstName,' ',LastName), CustomerId, Country FROM customers WHERE customers.Country='Brazil';
+
+3. SELECT CONCAT(FirstName,' ',LastName), customers.CustomerId, Country ,InvoiceId,invoiceDate
+FROM customers 
+JOIN invoices
+ON customers.CustomerId=invoices.CustomerId
+WHERE customers.Country='Brazil' ;
+
+4.SELECT CONCAT(FirstName,' ',LastName)
+FROM employees
+WHERE employees.Title='Sales Support Agent'
+
+5.SELECT BillingCountry
+FROM invoices
+Group By invoices.BillingCountry
+
+6.SELECT CONCAT(employees.FirstName,' ',employees.LastName), EmployeeId, InvoiceId
+FROM employees
+JOIN customers
+ON customers.SupportRepID=employees.EmployeeId
+JOIN invoices
+ON customers.customerId=invoices.customerId;
+
+7. 
+
+
+
+-- 8. SELECT COUNT(*) AS InvoiceCount2009, AS InvoiceCount2011
+-- FROM invoices
+-- WHERE InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31';
+-- WHERE InvoiceDate BETWEEN '2011-01-01' AND '2011-12-31'; WHERE문은 중복 불가
+
+8. SELECT 
+    COUNT(CASE WHEN InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31' THEN 1 END) AS InvoiceCount2009,
+    COUNT(CASE WHEN InvoiceDate BETWEEN '2011-01-01' AND '2011-12-31' THEN 1 END) AS InvoiceCount2011
+FROM invoices;
+-- ///////////////////////////////
+SELECT '2009' AS Year, 
+       COUNT(*) AS InvoiceCount
+FROM invoices
+WHERE InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31'
+
+UNION ALL
+
+SELECT '2011' AS Year, 
+       COUNT(*) AS InvoiceCount
+FROM invoices
+WHERE InvoiceDate BETWEEN '2011-01-01' AND '2011-12-31'
+
+
+9. SELECT InvoiceDate
+FROM invoices
+Group By invoices.InvoiceDate
+
+SELECT COUNT(SUBSTRING(InvoiceDate, 1, 4)) AS Year , SUM(invoice_items.quantity * invoice_items.UnitPrice) AS TP
+
+FROM invoices;
+
+JOIN invoice_items
+ON customers.SupportRepID=employees.EmployeeId
+
+SELECT '2009' AS Year, 
+       COUNT(*) AS InvoiceCount
+FROM invoices
+WHERE InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31'
+
+UNION ALL
+
+SELECT '2010' AS Year, 
+       COUNT(*) AS InvoiceCount
+FROM invoices
+WHERE InvoiceDate BETWEEN '2010-01-01' AND '2010-12-31'
+
+SELECT '2011' AS Year, 
+       COUNT(*) AS InvoiceCount
+FROM invoices
+WHERE InvoiceDate BETWEEN '2011-01-01' AND '2011-12-31'
+
+SELECT '2012' AS Year, 
+       COUNT(*) AS InvoiceCount
+FROM invoices
+WHERE InvoiceDate BETWEEN '2012-01-01' AND '2012-12-31'
+
+SELECT '2013' AS Year, 
+       COUNT(*) AS InvoiceCount
+FROM invoices
+WHERE InvoiceDate BETWEEN '2013-01-01' AND '2013-12-31';
+
+-- /////////////////////////////////
+SELECT SUBSTRING(InvoiceDate, 1, 4) AS Year, 
+SUM(invoice_items.UnitPrice * invoice_items.Quantity) AS TP
+FROM invoices
+JOIN invoice_items
+ON invoices.InvoiceId=invoice_items.InvoiceId
+GROUP BY SUBSTRING(InvoiceDate, 1, 4)
+ORDER BY Year;
+
+
+10.
+    SELECT COUNT(InvoiceLineId)
+    FROM invoice_items
+    WHERE InvoiceId=37;
+
+11.
+SELECT InvoiceId, COUNT(*) AS invoice_line
+FROM invoice_items
+GROUP BY invoiceId;
+
+12. 
+SELECT InvoiceLineId, tracks.TrackId, tracks.name
+FROM invoice_items
+JOIN tracks
+ON invoice_items.TrackId=tracks.TrackId;
+
+13.
+SELECT InvoiceLineId, tracks.name, artists.Name
+FROM invoice_items
+JOIN tracks
+ON invoice_items.TrackId=tracks.TrackId
+JOIN albums
+ON tracks.AlbumId=albums.AlbumId
+JOIN artists
+ON albums.artistId=artists.artistId;
+
+14.SELECT BillingCountry, COUNT(*) AS invoices
+FROM invoices
+GROUP BY BillingCountry;
+
+
+15.SELECT playlists.Name, COUNT(*) AS totalTracks
+FROM playlists
+JOIN playlist_track
+ON playlists.PlaylistId=playlist_track.PlaylistId
+JOIN tracks
+ON tracks.TrackId=playlist_track.TrackId
+GROUP BY playlists.Name;
+
+16. SELECT playlists.Name, genres.Name, media_types.Name
+FROM tracks
+JOIN playlist_track
+ON  tracks.TrackId=playlist_track.TrackId
+JOIN playlists
+ON playlists.PlaylistId=playlist_track.PlaylistId
+JOIN media_types
+ON media_types.MediaTypeId=tracks.MediaTypeId
+JOIN genres
+ON genres.GenreId=tracks.GenreId;
+
+17. SELECT InvoiceId, COUNT(InvoiceLineId)
+    FROM invoice_items
+    GROUP BY InvoiceId;
+    
+
+18. 
+
+SELECT CONCAT(employees.FirstName,' ',employees.LastName),
+SUM(invoices.Total) AS TP
+FROM employees
+JOIN customers
+ON customers.SupportRepID=employees.EmployeeId
+JOIN invoices
+ON customers.customerId=invoices.customerId
+GROUP BY CONCAT(employees.FirstName,' ',employees.LastName);
+
+19. 
+SELECT From'2009' AS Year, 
+       COUNT(*) AS InvoiceCount
+FROM invoices
+WHERE InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31'
+JOIN customers
+ON customers.SupportRepID=employees.EmployeeId
+JOIN employees
+ON employees.SupportRepID=employees.EmployeeId
+
+20.
+SELECT CONCAT(employees.FirstName,' ',employees.LastName),
+SUM(invoices.Total) AS TP
+FROM employees
+JOIN customers
+ON customers.SupportRepID=employees.EmployeeId
+JOIN invoices
+ON customers.customerId=invoices.customerId
+GROUP BY CONCAT(employees.FirstName,' ',employees.LastName);
+
+SELECT CONCAT(employees.FirstName, ' ', employees.LastName) AS EmployeeName, 
+       SUM(invoices.Total) AS TotalSales
+FROM employees
+JOIN customers ON customers.SupportRepID = employees.EmployeeId
+JOIN invoices ON customers.customerId = invoices.customerId
+GROUP BY CONCAT(employees.FirstName, ' ', employees.LastName)
+ORDER BY TotalSales DESC
+LIMIT 1;
+
+SELECT CONCAT(employees.FirstName, ' ', employees.LastName) AS EmployeeName, 
+       SUM(invoices.Total) AS TotalSales
+FROM employees
+JOIN customers ON customers.SupportRepID = employees.EmployeeId
+JOIN invoices ON customers.customerId = invoices.customerId
+GROUP BY CONCAT(employees.FirstName, ' ', employees.LastName)
+HAVING TotalSales = (SELECT MAX(TotalSales)
+                     FROM (SELECT SUM(invoices.Total) AS TotalSales
+                           FROM employees
+                           JOIN customers ON customers.SupportRepID = employees.EmployeeId
+                           JOIN invoices ON customers.customerId = invoices.customerId
+                           GROUP BY employees.EmployeeId) AS Sales);
