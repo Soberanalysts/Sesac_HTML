@@ -33,6 +33,35 @@ function initilizeDatabase() {
 
 initilizeDatabase();
 
+app.get('/products', (req, res) => {
+    const {name} =req.query;
+
+    console.log(name);
+
+    if (name) {
+        const query = db.prepare('SELECT - FROM products WHERE name LIKE ?');
+        const rows = query.all(`${name}`);
+        console.log(rows);
+
+        res.json(rows);
+    } else {
+        const query = db.prepare('SELECT * FROM products');
+        const rows = query.all();
+        res.json(rows);
+    }
+});
+
+app.get('/products_weak', (req, res) => {
+    const { name } = req.query;
+
+    console.log(name);
+    const queryStr = `SELECT * FROM products WHERE name LIKE '%${name}%`;
+    const query = db.prepare(queryStr);
+    const rows = query.all();
+    res.json(rows);
+});
+
+
 //한개 반납
 app.get('/users/:id', (req, res) => {
     //여러개 반납
