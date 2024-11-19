@@ -97,7 +97,8 @@ function handlePostRequest(req, res) {
                 // return res.end(`application/json 이구나...${parsedData}`);
                 return res.end(`application/json 이구나...body: ${body} json: ${parsedData}`);
                 // return res.end(`application/json 이구나...`);
-            } else if (req.headers) {req.headers['content-type'] === 'app'
+            } else if (req.headers) {
+                req.headers['content-type'] === 'app';
             } else {
                 res.writeHead(404);
                 return res.end('모르는 타입임')
@@ -121,7 +122,7 @@ function handlePutRequest(req, res) {
 function handleDeleteRequest(req, res) {
     if (req.url.startsWith('/user')) {
         // let deleteData = {};
-        let body = ''; // 데이터를 수신할 변수
+        let body = ''; // 데이터를 수신할 f변수
 
         req.on('data', (data) => {
             body += data; // 데이터 누적
