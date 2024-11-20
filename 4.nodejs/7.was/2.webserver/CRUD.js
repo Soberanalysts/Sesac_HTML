@@ -14,7 +14,7 @@ const server = http.createServer(async (req,res) =>{
         if(req.method === 'GET'){
             if (req.url ==='/'){
                 const data = await fs.readFile('./index.html');
-                res.writeHead(200, {'Content_Type':'text/html; charset=utf-8'});
+                res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
                 res.end(data);
             } else if (req.url === '/about') {
                 const data = await fs.readFile('./about.html');
@@ -28,7 +28,7 @@ const server = http.createServer(async (req,res) =>{
                 // console.log(`이미지 파일명: ${imageName}`);
                 console.log(`이미지 경로: ${imagePath}`);
                 const imageData = await fs.readFile(imagePath);
-                res.writeHead(200, {'Content-Type':'image/jpg'});
+                res.writeHead(200, {'Content-Type':'image/jpeg'});
                 res.end(imageData);
 
                 // 1.url 뒤에 있는 글자를 짤라서,

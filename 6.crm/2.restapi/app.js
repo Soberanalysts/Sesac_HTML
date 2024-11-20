@@ -11,8 +11,6 @@ const db = new sqlite3.Database('user-sample.db');
 //미들웨어
 app.use(express.static('public'));
 
-
-
 //라우트
 //시스템 호출용 API 라우트
 app.get('/api/users', (req, res) => {
@@ -40,8 +38,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve('public/users.html'))
     // res.sendFile(path.join(__dirname, 'public', 'users.html'));
 });
-
-
 
 
 //서버시작

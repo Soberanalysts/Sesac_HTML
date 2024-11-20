@@ -7,12 +7,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/user', (req, res) => {
-    res.send('결과를 출력한다');
+    res.send('user를 출력한다');
 });
 
-app.get('/user/:id', (req, res) => {
+app.get('/user/:name', (req, res) => {
     console.log(req.params);
-    res.send(`사용자 ${req.params.id}를 출력한다`);
+    res.send(`사용자 ${req.params.name}를 출력한다`);
+});
+app.get('/search', (req, res) => {
+    const queryparams = req.query;
+    console.log(queryparams);
+    res.send(`검색을 요청한 내용은 ${queryparams.q} 와 최근 ${queryparams.top}`);
 });
 
 app.get('/user/:id/profile', (req, res) => {

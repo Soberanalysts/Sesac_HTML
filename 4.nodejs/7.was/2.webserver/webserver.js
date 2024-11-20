@@ -20,28 +20,28 @@ const server = http.createServer(async (req,res) =>{
         if(req.method === 'GET'){
             if (req.url ==='/'){
                 const data = await fs.readFile('./index.html');
-                res.writeHead(200, {'Content_Type':'text/html; charset=utf-8'});
+                res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
                 res.end(data);
             } else if (req.url === '/about') {
                 const data = await fs.readFile('./about.html');
                 res.writeHead(200, {'Content-Type' : 'text/html; charset=utf-8'});
                 res.end(data);
-            } else if (req.url === '/user') {
-                res.writeHead(200, {'Content-Type' : 'application/json; charset=utf-8'});
-                // const data = await 
-                res.end(JSON.stringify(userData));
-                req.on('end', () => {
-                    console.log(`데이터가 받아진 후: ${userData}`);
-                })
+            // } else if (req.url === '/user') {
+            //     res.writeHead(200, {'Content-Type' : 'application/json; charset=utf-8'});
+            //     // const data = await 
+            //     res.end(JSON.stringify(userData));
+            //     req.on('end', () => {
+            //         console.log(`데이터가 받아진 후: ${userData}`);
+            //     })
             } else if (req.url.startsWith('/image/')){
                 console.log(`이미지 파일명 추출은?? ${req.url}`);
-                // console.log(`파일명 : ${req.url.split('/image/')[0]}, ${req.url.split('/image/')[1]}`)
+                // console.log(`파일명: ${req.url.split('/image/')[0]}, ${req.url.split('/image/')[1]}`)
                 const imageName = path.basename(req.url);
                 const imagePath = path.join('static', imageName);
                 // console.log(`이미지 파일명: ${imageName}`);
                 console.log(`이미지 경로: ${imagePath}`);
                 const imageData = await fs.readFile(imagePath);
-                res.writeHead(200, {'Content-Type':'image/jpg'});
+                res.writeHead(200, {'Content-Type':'static/jpg'});
                 
                 res.end(imageData);
                 // 1.url 뒤에 있는 글자를 짤라서,
@@ -62,16 +62,17 @@ const server = http.createServer(async (req,res) =>{
                 req.on('end', () => {
                     console.log(`데이터가 받아진 후: ${body}`);
                     // userData.name = username;
+                });
                     const formData = parse(body);
                     console.log('받은데이터는??', formData);
                     const username = formData.name;
-                    console.log('그래서 유저네임은??', userData);
+                    console.log('그래서 유저네임은??', username);
                     userData[username]=username;
                     res.writeHead(200, {'Content-Type':'text/html; charset-utf-8'});
                     res.end('등록 완료');
-                })
+                
             } else {
-                res.writeHead(404, {'Content-Type':'text/html; charset-utf-8'});
+                res.writeHead(404, {'Content-Type':'text/html; charset=utf-8'});
                 res.end('Not Found');
             }
         } else if (req.method === 'DELETE') {

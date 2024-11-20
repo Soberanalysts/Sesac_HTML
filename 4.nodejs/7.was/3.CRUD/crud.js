@@ -31,15 +31,6 @@ async function handleGetRequest(req, res) {
             const data = await fs.readFile('./index.html');
             res.end(data);
         } else if (req.url === '/about') {
-            // const filePath = path.join(__dirname, req.url);
-            // const fileExt = path.extname(filePath);
-            // let contentType = 'text.plain';
-            // if(fileExt == '.jpeg' || fileExt === '.jpg') {
-            //     contentType = 'image/jpeg';
-            // } else if (fileExt === '.png') {
-            //     contentType = 'image/png';
-            // }
-            // console.log(req.url);
             const data = await fs.readFile('./about.html');
             console.log(data);  //Q. pending뜨지 않으려면?? 
             res.writeHead(200, {'Content-Type' : 'text/html; charset=utf-8'});
@@ -50,12 +41,7 @@ async function handleGetRequest(req, res) {
             // console.log(users);
             res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'})
             res.end(JSON.stringify(users));
-        // } else if (req.url.startsWith('/static')) {
-        //     const filePath = path.join(__dirname ,req.url);
-        //     console.log(filePath);
-        //     const data = await fs.readFile(filePath);
-        //     res.writeHead(200, {'Content-Type':'application/javascript; charset=utf-8'})
-        //     res.end("파일 곧 전송됨....");
+
         } else if (req.url.startsWith("/static")) {
             const imageName = path.basename(req.url);
             const imagePath = path.join("static", imageName);
@@ -97,8 +83,9 @@ function handlePostRequest(req, res) {
                 // return res.end(`application/json 이구나...${parsedData}`);
                 return res.end(`application/json 이구나...body: ${body} json: ${parsedData}`);
                 // return res.end(`application/json 이구나...`);
-            } else if (req.headers) {
-                req.headers['content-type'] === 'app';
+            } else if (req.headers['content-type'] === 'application/x-www-form-urlencoded') {
+                res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'})
+                return res.end(`form으로 데이터를 잘 받았음.`)
             } else {
                 res.writeHead(404);
                 return res.end('모르는 타입임')
@@ -109,8 +96,32 @@ function handlePostRequest(req, res) {
 }
 
 function handlePutRequest(req, res) {
-    if (req.url === '/') {
-        res.end('PUT요청 / 응답완료');
+    if (req.url.startsWith('/user')) {
+        let body='';
+        const key = req.url.split('/')[2];
+
+        req.on('data', (data) => {
+            body += data; // 데이터 누적
+        });
+        req.on('end', () => {
+            if (users[key]) {
+                try {
+                    const parseData = JSON.parse(body); //JSON 파싱 시 오류가 발생 할 수 있음
+                    users[key] = parseData.name || users[key]; // name이 없을시 기본값 유지
+                    res.writeHead(200, {'Content-Type': 'application/json'});
+                    res.end(JSON.stringify(users));
+                } catch (error) {
+                    console.error('JSON 파싱 또는 사용자 업데이트 오류:', error);
+                    res.writesHead(400, { 'Content-Type': 'text/plain; charset=utf-8'});
+                    res.end('잘못된 요청 형식이거나 처리 중 오류가 발생했습니다.');
+                }
+            } else {
+                res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+                res.end('사용자를 찾을 수 없습니다.');
+            }
+        })
+
+        // res.end('PUT요청 / 응답완료');
     } else if (req.url === '/about') {
         res.end('PUT요청 /about 응답완료');
     } else {

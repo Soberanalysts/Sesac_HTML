@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             {% for row in data %}
-            <tr>
+            <tr onclick="window.location='/users/{{ row.Id}}';">
                 <td>{{ user.Id }}</td>
                 <td>{{ user.Name }}</td>
                 <td>{{ user.Gender }}</td>
