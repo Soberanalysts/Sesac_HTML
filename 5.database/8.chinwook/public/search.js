@@ -2,14 +2,17 @@ document.getElementById('searchForm').addEventListener('submit', (e) => {
     e.preventDefault();
 
     const searchQuery = document.getElementById('searchQuery').value;
+    const searchSection = document.getElementById('searchSection').value;
 
-    search(searchQuery, 1);
+    search(searchQuery, searchSection, 1);
 });
 
-async function search(searchQuery, page) {
+async function search(searchQuery, searchSection, page) {
     console.log(searchQuery);
 
-    const response = await fetch(`/api/search?searchQuery=${encodeURIComponent(searchQuery)}&page=${page}`)
+    const response = await fetch(`/api/search?searchQuery=${encodeURIComponent(searchQuery)}&searchSection=${encodeURIComponent(searchSection)}&page=${page}`)
+    console.log(response);
+
     const data = await response.json();
     console.log(data);
     

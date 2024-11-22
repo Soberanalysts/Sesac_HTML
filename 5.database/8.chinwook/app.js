@@ -18,9 +18,9 @@ app.get('/',(req, res) => {
 });
 
 app.get('/api/search', (req, res) => {
-    const {searchQuery, page=1} = req.query;  //페이지는 기본 1페이지로 세팅
+    const {searchQuery, searchSection, page=1} = req.query;  //페이지는 기본 1페이지로 세팅
 
-    console.log(`사용자 입력: ${searchQuery}, 페이지: ${page}`);
+    console.log(`사용자 입력: ${searchQuery}, 검색 주제: ${searchSection}, 페이지: ${page}`);
     const itemsPerPage = 10;
     const offset = (page -1) * itemsPerPage;
 
@@ -33,7 +33,8 @@ app.get('/api/search', (req, res) => {
         const totalPage = Math.ceil(row.count / itemsPerPage);
         console.log(`갯수: ${row.count}, 전체페이지수: ${totalPage}`);
 
-        const sql = `SELECT * FROM artists WHERE name LIKE ? LIMIT ? OFFSET ?`;
+        // const sql = `SELECT * FROM artists WHERE name LIKE ? LIMIT ? OFFSET ?`;
+        const sql = `SELECT * FROM ${searchSection} WHERE (name || Title) LIKE ? LIMIT ? OFFSET ?`;
         db.all(sql, [`%${searchQuery}%`, itemsPerPage, offset], (err, rows) => {
             res.json({ results: rows, currentPage: page, totalPage: totalPage, status: "ok" });
         });

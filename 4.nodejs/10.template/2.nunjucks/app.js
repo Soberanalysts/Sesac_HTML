@@ -1,9 +1,10 @@
-const express = express();
+const express = require('express');
 const nunjucks = require('nunjucks');
 
 const app = express();
 
-app.set('view engine', 'njk');
+// app.set('view engine', 'njk');
+app.set('view engine', 'html');
 
 
 
@@ -13,8 +14,23 @@ nunjucks.configure('views', {
 });
 
 app.get('/', (req, res) => {
-    res.render('index.html', {title: '익스프레스웹', message: '웰컴'});
+    res.render('index.html', {title: '익스프레스웹', message: '웰컴투 Nunjucks'});
 });
+
+app.get('/fruits', (req, res) => {
+    const fruits = ['Apple', 'Banana', 'Orange', 'Graphs'];
+    res.render('fruits', {fruits: fruits});
+});
+
+app.get('/greeting', (req, res) => {
+    const username = 'shpark'; // 실제로는 이건 DB에서 가져오는 로직이 있을거고...
+    res.render('greeting', { username });
+})
+
+app.get('/welcome', (req, res) => {
+    const isAdmin = false; // 나중에는 실제 사용자 권한으로...
+    res.render('welcome', { isAdmin })
+})
 
 app.listen(3000, () => {
     console.log('서버 레디');
