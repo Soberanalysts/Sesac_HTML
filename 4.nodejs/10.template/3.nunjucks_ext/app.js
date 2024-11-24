@@ -19,6 +19,8 @@ app.get('/', (req, res) => {
     res.render('main', data)
 });
 
+//////////////백엔드에서 만들어 내는 html파일을 모듈화
+
 app.get('/user', (req, res) => {
     const data = {
         title: '사용자 Page',

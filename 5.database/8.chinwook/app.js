@@ -33,8 +33,8 @@ app.get('/api/search', (req, res) => {
         const totalPage = Math.ceil(row.count / itemsPerPage);
         console.log(`갯수: ${row.count}, 전체페이지수: ${totalPage}`);
 
-        // const sql = `SELECT * FROM artists WHERE name LIKE ? LIMIT ? OFFSET ?`;
-        const sql = `SELECT * FROM ${searchSection} WHERE (name || Title) LIKE ? LIMIT ? OFFSET ?`;
+        const sql = `SELECT * FROM artists WHERE name LIKE ? LIMIT ? OFFSET ?`;
+        // const sql = `SELECT * FROM ${searchSection} WHERE (name || Title) LIKE ? LIMIT ? OFFSET ?`;
         db.all(sql, [`%${searchQuery}%`, itemsPerPage, offset], (err, rows) => {
             res.json({ results: rows, currentPage: page, totalPage: totalPage, status: "ok" });
         });

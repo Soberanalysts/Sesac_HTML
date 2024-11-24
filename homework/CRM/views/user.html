@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
 </head>
 <body>
     <h1>사용자 테이블</h1>
@@ -18,7 +19,13 @@
             </tr>
         </thead>
         <tbody>
-            {% for row in data %}
+            <section id="container">
+                <table>
+                    <thead id="table-header"></thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </section>
+            <!-- {% for row in data %}
             <tr onclick="window.location='/users/{{ row.Id}}';">
                 <td>{{ user.Id }}</td>
                 <td>{{ user.Name }}</td>
@@ -26,8 +33,11 @@
                 <td>{{ user.Age }}</td>
                 <td>{{ user.Birthday }}</td>
             </tr>
-            {% endfor %}
+            {% endfor %} -->
+
         </tbody>
     </table>
+    <script src="search.js" defer></script>
+
 </body>
 </html>

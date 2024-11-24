@@ -4,9 +4,6 @@ document.getElementById('searchForm').addEventListener('submit', (e) => {
     const searchQuery = document.getElementById('searchQuery').value;
     const searchSection = document.getElementById('searchSection').value;
 
-
-
-
     search(searchQuery, searchSection, 1);
 });
 
@@ -20,48 +17,58 @@ async function search(searchQuery, searchSection, page) {
     console.log(data);
     
 
-    // const results = document.getElementById('results');
-    // results.innerHTML = '';
-
-    const resultsTable = document.getElementById("results").querySelector("tbody");
-    resultsTable.innerHTML = "";
-    // 결과 테이블의 <tbody> 비우기
+    const results = document.getElementById('results');
+    results.innerHTML = '';
 
     if (data.results && data.results.length > 0) {
-        // data.results.forEach((artist) => {
-        //     const li = document.createElement('li');
-        //     li.textContent = artist.Name;
-        //     results.appendChild(li);
-        // })
-        data.results.forEach((artist, result) => {
-            const row = document.createElement("tr");
-
-            // 번호 열
-            const numberCell = document.createElement("td");
-            numberCell.textContent = artist.ArtistId;
-            row.appendChild(numberCell);
-
-            // 이름 열
-            const nameCell = document.createElement("td");
-            nameCell.textContent = artist.Name; // API 데이터 구조에 따라 수정 필요
-            row.appendChild(nameCell);
-
-            // 세부 정보 열
-            const detailsCell = document.createElement("td");
-            detailsCell.textContent = result.details || "-"; // 세부 정보가 없을 경우 처리
-            row.appendChild(detailsCell);
-
-            // 테이블에 행 추가
-            resultsTable.appendChild(row);
-    })
+        data.results.forEach((artist) => {
+            const li = document.createElement('li');
+            li.textContent = artist.Name;
+            results.appendChild(li);
+        })
     } else {
         const li = document.createElement('li');
         li.textContent = '검색 결과가 없습니다.';
         results.appendChild(li);
     }
+    // displayTable();
 
-    // displayPagination(searchQuery, parseInt(data.currentPage), ParseInt(data.totalPage));
+    displayPagination(searchQuery, parseInt(data.currentPage), ParseInt(data.totalPage));
 }
+// function displayTable()
+
+function renderTable(data) {
+    const tableHeader = document.getElementById("table-header");
+    const tableBody = document.getElementById("table-body");
+    tableHeader.innerHTML = "";
+    tableBody.innerHTML = "";
+    //헤더 그리기 tr 안에 th 그리기
+    const headerRow = document.createElement("tr");
+    const fields = Object.keys(data[0]);
+    fields.forEach((f) => {
+      if (f !== "Address") {
+        const th = document.createElement("th");
+        th.textContent = f;
+        headerRow.appendChild(th);
+      }
+    });
+    tableHeader.appendChild(headerRow);
+    // 바디 그리기 tr 안에 td 그리기
+    data.map((e) => {
+      const bodyRow = document.createElement("tr");
+      bodyRow.addEventListener("click", () => {
+        window.location.href = `/user/${e.Id}`;
+      });
+      for (const [key, value] of Object.entries(e)) {
+        if (key !== "Address") {
+          const td = document.createElement("td");
+          td.textContent = value;
+          bodyRow.appendChild(td);
+        }
+      }
+      tableBody.appendChild(bodyRow);
+    });
+  }
 
 function displayPagination(searchQuery, currPage, totalPage) {
     const pagination = document.getElementById('pagination');
