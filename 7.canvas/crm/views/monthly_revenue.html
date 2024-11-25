@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>월간 매출액</h1>
+    <table>
+        <tr>
+            <th>년-월</th>
+            <th>해당월 매출액</th>
+        </tr>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row.YearMonth }}</td>
+            <td>{{ row.MonthlyRevenue }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        //1. 백엔드에서 rows라고 보냈으니.. 어떻게든 여기에서 추출한다.
+        const rows = {{ rows | safe}};
+
+        // const labels =
+
+        console.log(rows);
+
+        //2. 내가 원하는 걸 백엔드에서 보내준다..
+        //백엔드에서 넘겨주는 변수 받아오기 - 우리가 원하는 데이터는 어떤형태인가??
+
+        const ctx = document.getElementById('chart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                // labels: [x축의 데이터]
+
+                datasets: [{
+                    labels: 'Mopnthly Revenue',
+                    // data: [실제 디이터의 y축값]
+                }]
+            },
+            options: {
+
+            }
+        });
+
+        const labels = {{ labels }};
+        const revenues = {{ revenues }};
+
+
+    </script>
+</body>
+</html>

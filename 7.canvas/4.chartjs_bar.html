@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <canvas id="barGraph" width="400" height="200"></canvas>
+    </div>
+    
+    <script src="htttps://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 라이브러리 불러오기 -->
+    
+    <script>
+
+        const ctx = canvas.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [
+                    {
+                        label: '# of Votes',
+                        data: [12, 19, 5, 8, 20, 13],
+                        borderWidth: 2,
+                        backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+                plugins: {
+                    filler: {
+                        propagate: true,
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
