@@ -45,6 +45,14 @@ app.get('/', (req, res) => {
                 res.render('monthly_revenue', { rows });
             }
         });
+
+        db.close((err) => {
+            if (err) {
+                console.error("DB닫기 실패.. 왜?? ", err.message);
+            } else {
+                console.log('DB 닫기 성공');
+            }
+        })
 })
 
 app.listen(port, () => {

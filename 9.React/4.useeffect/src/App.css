@@ -1,0 +1,12 @@
+.clear {
+    text-align: center;
+    background-color: rgb(0, 162, 255);
+    color: aliceblue;
+}
+
+.loaddata {
+    text-align: center;
+    background-color: rgb(255, 0, 0);
+    color: aliceblue;
+    
+}
