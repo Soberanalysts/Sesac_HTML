@@ -1,5 +1,4 @@
 const VideoList = ({ videos, link}) => {
-    console.log("videolist : ", videos);
     return (
         <ul>
             {videos.map((video) => (
@@ -10,12 +9,12 @@ const VideoList = ({ videos, link}) => {
                         <p>{video.snippet.description}</p>
                         <iframe 
                             width="560" height="315" 
-                            src={`https://www.youtube.com/embed/${video.id.videoId}`} 
+                            src="https://www.youtube.com/embed/${video.id}" 
                             title="YouTube video player" frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; 
                             encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                         </iframe>
-                        <a href={`https://www.youtube.com/watch?v=${video.id.videoId}`} target="_blank" rel="noopener noreferrer">watch</a>
+                        <a href={`https://www.youtube.com/watch?v=${link}`} target="_blank" rel="noopener noreferrer">watch</a>
                         {/* <href>{`https://www.youtube.com/watch?v=${video.id}`}</href> */}
                     </div>
                 </li>

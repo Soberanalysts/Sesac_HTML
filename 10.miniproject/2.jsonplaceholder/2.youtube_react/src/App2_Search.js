@@ -20,6 +20,7 @@ const YoutubeApp = () => {
                     params: {
                         part: 'snippet',
                         q: query,
+                        type: 'video',
                         maxResults: 11,
                         key: API_KEY,
                     }
@@ -27,7 +28,7 @@ const YoutubeApp = () => {
                 // 
                 const videoIds = response.data.items
                 .map((item) => item.id.videoId) // Get videoId from each result
-                .filter((id) => id); // Remove undefined values (e.g., playlists)
+                // .filter((id) => id); // Remove undefined values (e.g., playlists)
                 console.log(response.data.items);
                 // table.index = response.data.index + 1;
                 // table.Title = response.data.map((video) => video.snippet.title);
@@ -35,7 +36,7 @@ const YoutubeApp = () => {
                 // if (videoIds.length > 0) {
                     const videoResponse = await axios.get(`${VIDEOS_URL}`, {
                         params: {
-                            part: 'snippet,contentDetails,statistics',
+                            part: 'snippet,statistics',
                             id: videoIds.join(','), // Pass video IDs as a comma-separated string
                             key: API_KEY,
                         },
