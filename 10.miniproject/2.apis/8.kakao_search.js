@@ -25,11 +25,11 @@ const params2 = {
 
 
 // Promise 기반 체이닝... (~ES6... 2015년)
-axios.get(url, { headers, params})
-    .then(resposne => {
-        const data = resposne.data;
-        console.log(data);
-    });
+// axios.get(url, { headers, params})
+//     .then(response => {
+//         const data = response.data;
+//         console.log(data);
+//     });
 
     // Moderb JS 방식..
     // async/await 방식 (ES8부터 도입?... ES2017년도...)
@@ -56,12 +56,12 @@ const fetchFunction = async () => {
 
 const totalPages = 3;
 
-const fetchFunctionPages = async () => {
+const fetchFunctionPages = async (totalPages) => {
     //try catch 실무적으로 필수
     try {
         for (let page = 1;page <= totalPages; page++){
             params2.page=page;
-            console.log(params2);
+            // console.log(params2);
             const response = await axios.get(url, {headers, params2});
             const data = response.data;
             console.log(data);

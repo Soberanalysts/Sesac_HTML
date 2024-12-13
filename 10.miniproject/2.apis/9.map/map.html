@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <style>
+        #map { height: 600px}
+     </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>     
+    <script>
+        var map = L.map('map').setView([37.715133, 126.734086], 12);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+
+        var circle = L.circle([37.51854, 126.93751], {
+            color: 'red',
+            fillColor: 'blue',
+            fillOpacity: 0.5,
+            radius: 500,
+        }).addTo(map);
+
+        var touristSpot = [
+            {
+                name: '경복궁',
+                location: '경복궁은 조선시대의 범궁이자 서울의 대표적인 궁궐입니다.',
+                imageUrl: 'https://via.placeholder.com/150',
+            },
+            {
+                name: '남산 타워',
+                location: '남산타워는 서울의 랜드마크중 하나로, 서울의 대표적인 궁궐입니다.',
+                imageUrl: 'https://via.placeholder.com/150',
+            }
+        ]
+
+        touristSpot.forEach((spot) => {
+            var marker = L.marker(spot.location).addTo(map).bindPopup(spot.name)
+        })
+
+
+    </script>
+</body>
+</html>
