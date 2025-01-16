@@ -6,6 +6,7 @@ const MemoList = ({
   editMemo,
   toggleDone,
   reorderMemos,
+  showDetail
 }) => {
   const handleDragEnd = (result) => {
     const { source, destination } = result;

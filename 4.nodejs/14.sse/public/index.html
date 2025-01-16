@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <H1>SSE(Server Sent Event)</H1>
+    <div id="output"></div>
+    <script>
+        const eventSource = new EventSource('http://127.0.0.1:3000/events');
+
+        //메시지 수신되었으면??
+        eventSource.onmessage = (event) => {
+            const outputDiv = document.getElementById('output');
+            const newMessage = document.createElement('p');
+            newMessage.textContent = `서버메시지: ${event.data}`;
+            outputDiv.appendChild(newMessage);
+        }
+
+        eventSource.onerror = (error) => {
+            console.error('서버연결실패: ', error)
+        }
+    </script>
+</body>
+</html>

@@ -10,7 +10,7 @@ function App() {
 
     const [memos, setMemos] = useState(() => {
         const savedMemos = localStorage.getItem('memos');
-        return 
+        return savedMemos ? JSON.parse(savedMemos) : []; // 있으면 문자열을 다시 JSON으로 변환해서 저장, 아니면 빈값으로 초기화
     });
     const [searchQuery, setSearchQuery] = useState(''); //검색상태
 
@@ -78,10 +78,10 @@ function App() {
 // const search =() => {
 
 //     }
-    // const filteredMemo = memos.filter((memo) => {
-    //     console.log(memo);
-    //     return memo.text.toLowerCase().includes(searchQuery.toLowerCase())
-    // })
+    const filteredMemo = memos.filter((memo) => {
+        console.log(memo);
+        return memo.text.toLowerCase().includes(searchQuery.toLowerCase())
+    })
 
     return (
         <div>
@@ -102,8 +102,8 @@ function App() {
 
             <MemoForm addMemo={addMemo}/>
             <MemoList 
-                memos={memos} 
-                // memos={filteredMemo} 
+                // memos={memos} 
+                memos={filteredMemo} 
                 deleteMemo={DeleteMemo} 
                 editMemo={editMemo}
                 toggleDone={toggleComplete}

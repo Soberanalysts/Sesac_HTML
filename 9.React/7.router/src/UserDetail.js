@@ -1,8 +1,9 @@
 import {useParams} from 'react-router-dom';
 
 const UserDetail = () => {
-    const { userId } = useParams();
+    const { userId } = useParams(); //URL에서 userId 추출
 
+    // mock 데이터... 백엔드가 없다고 놀고 있을거냐??
     const users = [
         {id : 1, name: 'Alice', email: 'alice@example.com', age: 25},
         {id : 2, name: 'Bob', email: 'bob@example.com', age: 30},

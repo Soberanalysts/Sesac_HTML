@@ -4,9 +4,6 @@ document.getElementById('searchForm').addEventListener('submit', (e) => {
     const searchQuery = document.getElementById('searchQuery').value;
     const searchSection = document.getElementById('searchSection').value;
 
-
-
-
     search(searchQuery, searchSection, 1);
 });
 

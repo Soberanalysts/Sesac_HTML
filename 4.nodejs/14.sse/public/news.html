@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #news-container {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .news-item {
+            padding: 5px;
+            border-bottom: 1px solid;
+        }
+        .highlight {
+            background-color: yellow;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>라이브 새싹 뉴스</h1>
+    <div id="news-container"></div>
+    <script>
+        const eventSource = new EventSource('/news');
+        const newsContainer = document.getElementById('news-container');
+        let newsList = [];
+
+        eventSource.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            newsList.unshift(data.news);
+            if (newsList.length > 5) {
+                newsList.pop();
+            };
+
+            // newContainer.innerHTML += data.news + '<hr>';
+            newsContainer.innerHTML = newsList.map(news => `<div class="news-item">${news}</div>`).join('');
+
+            setTimeout(() => {
+                const highlightedItem = document.querySelector('.highlight');
+                if (highlightedItem) {
+                    highlightedItem.classList.remove('highlight');
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

@@ -25,7 +25,8 @@ function registerUser(name) {
     fetch('/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({ name }) //name = name의 값
+        body: JSON.stringify({ name: name
+         }) //name = name의 값
     }).then((response) => {
         if (response.ok) {
             username.value = "";
